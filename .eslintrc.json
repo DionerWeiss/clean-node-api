@@ -3,10 +3,14 @@
     "parserOptions": {
       "project": "./tsconfig.eslint.json"
     },
+    "ignorePatterns": [
+    "/*.*"
+    ],
     "rules": {
         "@typescript-eslint/strict-boolean-expressions": "off",
         "@typescript-eslint/method-signature-style": "off",
         "no-return-await": "off",
-        "@typescript-eslint/return-await": "off"
+        "@typescript-eslint/return-await": "off",
+        "@typescript-eslint/parser": "off"
     }
 }
