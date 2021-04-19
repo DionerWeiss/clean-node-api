@@ -11,6 +11,7 @@
         "@typescript-eslint/method-signature-style": "off",
         "no-return-await": "off",
         "@typescript-eslint/return-await": "off",
-        "@typescript-eslint/parser": "off"
+        "@typescript-eslint/parser": "off",
+        "@typescript-eslint/no-misused-promises": "off"
     }
 }
