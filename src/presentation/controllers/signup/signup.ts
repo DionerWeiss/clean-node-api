@@ -1,4 +1,4 @@
-import { badRequest, serverError, ok } from '../../helpers/httpHelper'
+import { badRequest, serverError, ok } from '../../helpers/http/httpHelper'
 import {
   HttpRequest,
   HttpResponse,
