@@ -13,6 +13,9 @@ export default {
   transform: {
     '.+\\.ts$': 'ts-jest'
   },
-  testMatch: ['**/*.spec.ts', '**/*.test.ts']
+  testMatch: ['**/*.spec.ts', '**/*.test.ts'],
+  moduleNameMapper: {
+    '@/(.*)': '<rootDir>/src/$1'
+  }
 
 }
