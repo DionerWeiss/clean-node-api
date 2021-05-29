@@ -5,7 +5,7 @@ import {
   SaveSurveyResultModel
 } from './db-save-survey-result-protocols'
 
-export class DbASaveSurveyResult implements SaveSurveyResult {
+export class DbSaveSurveyResult implements SaveSurveyResult {
   constructor (private readonly saveSurveyResultRepository: SaveSurveyResultRepository) {}
 
   async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {

@@ -1,4 +1,4 @@
-import { DbASaveSurveyResult } from './db-save-survey-result'
+import { DbSaveSurveyResult } from './db-save-survey-result'
 import {
   SaveSurveyResultRepository,
   SurveyResultModel,
@@ -28,20 +28,20 @@ const makeSaveSurveyResultRepository = (): SaveSurveyResultRepository => {
 }
 
 type SutTypes = {
-  sut: DbASaveSurveyResult
+  sut: DbSaveSurveyResult
   saveSurveyResultRepositoryStub: SaveSurveyResultRepository
 }
 
 const makeSut = (): SutTypes => {
   const saveSurveyResultRepositoryStub = makeSaveSurveyResultRepository()
-  const sut = new DbASaveSurveyResult(saveSurveyResultRepositoryStub)
+  const sut = new DbSaveSurveyResult(saveSurveyResultRepositoryStub)
   return {
     sut,
     saveSurveyResultRepositoryStub
   }
 }
 
-describe('DbASaveSurveyResult Usecase', () => {
+describe('DbSaveSurveyResult Usecase', () => {
   beforeAll(() => {
     MockDate.set(new Date())
   })
