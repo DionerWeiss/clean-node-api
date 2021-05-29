@@ -8,7 +8,7 @@ import {
   SurveyResultModel
 } from './save-survey-result-controller-protocols'
 import { InvalidParamError } from '@/presentation/errors'
-import { forbiden, serverError } from '@/presentation/helpers/http/httpHelper'
+import { forbiden, ok, serverError } from '@/presentation/helpers/http/httpHelper'
 import MockDate from 'mockdate'
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -132,5 +132,11 @@ describe('SaveSurveyResultController', () => {
     jest.spyOn(saveSurveyResultStub, 'save').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const htppResponse = await sut.handle(makeFakeRequest())
     expect(htppResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const htppResponse = await sut.handle(makeFakeRequest())
+    expect(htppResponse).toEqual(ok(makeFakeSurveyResult()))
   })
 })
