@@ -4,7 +4,7 @@ import {
   LoadSurveyById,
   SurveyModel,
   SaveSurveyResult,
-  SaveSurveyResultModel,
+  SaveSurveyResultParams,
   SurveyResultModel
 } from './save-survey-result-controller-protocols'
 import { InvalidParamError } from '@/presentation/errors'
@@ -49,7 +49,7 @@ const makeLoadSurveyById = (): LoadSurveyById => {
 }
 const makeSaveSurveyResult = (): SaveSurveyResult => {
   class SaveSurveyResultStubIdStub implements SaveSurveyResult {
-    async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
+    async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
       return new Promise(resolve => resolve(makeFakeSurveyResult()))
     }
   }
