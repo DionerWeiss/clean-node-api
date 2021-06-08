@@ -1,4 +1,4 @@
-import { noContent, ok, serverError } from '@/presentation/helpers/http/httpHelper'
+import { noContent, ok, serverError } from '@/presentation/helpers/http/http-helper'
 import {
   Controller,
   HttpRequest,

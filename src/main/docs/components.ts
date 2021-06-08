@@ -1,6 +1,6 @@
 import {
   badRequest,
-  forbiden,
+  forbidden,
   notFound,
   serverError,
   unauthorized
@@ -13,7 +13,7 @@ export default {
     apiKeyAuth: apiKeyAuthSchema
   },
   badRequest,
-  forbiden,
+  forbidden,
   notFound,
   serverError,
   unauthorized

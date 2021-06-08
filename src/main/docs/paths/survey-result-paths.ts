@@ -34,7 +34,7 @@ export const surveyResultPath = {
         }
       },
       403: {
-        $ref: '#/components/forbiden'
+        $ref: '#/components/forbidden'
       },
       404: {
         $ref: '#/components/notFound'
@@ -70,7 +70,7 @@ export const surveyResultPath = {
         }
       },
       403: {
-        $ref: '#/components/forbiden'
+        $ref: '#/components/forbidden'
       },
       404: {
         $ref: '#/components/notFound'

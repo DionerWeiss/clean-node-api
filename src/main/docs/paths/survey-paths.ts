@@ -17,7 +17,7 @@ export const surveyPath = {
         }
       },
       403: {
-        $ref: '#/components/forbiden'
+        $ref: '#/components/forbidden'
       },
       404: {
         $ref: '#/components/notFound'
@@ -47,7 +47,7 @@ export const surveyPath = {
         description: 'Sucesso'
       },
       403: {
-        $ref: '#/components/forbiden'
+        $ref: '#/components/forbidden'
       },
       404: {
         $ref: '#/components/notFound'
