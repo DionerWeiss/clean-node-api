@@ -14,6 +14,8 @@
         "no-return-await": "off",
         "@typescript-eslint/return-await": "off",
         "@typescript-eslint/parser": "off",
-        "@typescript-eslint/no-misused-promises": "off"
+        "@typescript-eslint/no-misused-promises": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "import/export": "off"
     }
 }
