@@ -1,8 +1,8 @@
-import MockDate from 'mockdate'
-import faker from 'faker'
 import { DbLoadSurveyById } from '@/data/usecases'
 import { LoadSurveyByIdRepositorySpy } from '@/tests/data/mocks'
 import { throwError } from '@/tests/domain/mocks'
+import MockDate from 'mockdate'
+import faker from 'faker'
 
 type SutTypes = {
   sut: DbLoadSurveyById
@@ -42,7 +42,7 @@ describe('DbLoadSurveyById', () => {
   test('Should return Survey on success', async () => {
     const { sut, loadSurveyByIdRepositorySpy } = makeSut()
     const survey = await sut.loadById(surveyId)
-    expect(survey).toEqual(loadSurveyByIdRepositorySpy.surveyModel)
+    expect(survey).toEqual(loadSurveyByIdRepositorySpy.result)
   })
 
   test('Should throw if LoadSurveyByIdRepository throws', async () => {
