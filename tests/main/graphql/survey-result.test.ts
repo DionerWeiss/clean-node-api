@@ -210,7 +210,8 @@ describe('SurveyResult GraphQL', () => {
       const { mutate } = createTestClient({ apolloServer })
       const res: any = await mutate(saveSurveyResultMutation, {
         variables: {
-          surveyId: surveyRes.ops[0]._id.toString()
+          surveyId: surveyRes.ops[0]._id.toString(),
+          answer: 'Answer 1'
         }
       })
 
