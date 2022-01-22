@@ -1,15 +1,13 @@
-import { makeApolloServer } from '@/tests/main/graphql/helpers'
 import { MongoHelper } from '@/infra/db'
+import app from '@/main/config/app'
 
-import { createTestClient } from 'apollo-server-integration-testing'
-import { ApolloServer, gql } from 'apollo-server-express'
 import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
 import env from '@/main/config/env'
+import request from 'supertest'
 
 let surveyCollection: Collection
 let accountCollection: Collection
-let apolloServer: ApolloServer
 
 const makeAccessToken = async (): Promise<string> => {
   const res = await accountCollection.insertOne({
@@ -34,7 +32,6 @@ const makeAccessToken = async (): Promise<string> => {
 
 describe('Survey GraphQL', () => {
   beforeAll(async () => {
-    apolloServer = makeApolloServer()
     await MongoHelper.connect(process.env.MONGO_URL)
   })
 
@@ -51,20 +48,19 @@ describe('Survey GraphQL', () => {
   })
 
   describe('Surveys Query', () => {
-    const surveysQuery = gql`
-      query surveys {
-        surveys {
-          id
-          question
-          answers {
-            image
-            answer
-          }
-          date
-          didAnswer
+    const query = `query surveys {
+      surveys {
+        id
+        question
+        answers {
+          image
+          answer
         }
+        date
+        didAnswer
       }
-    `
+    }
+  `
 
     test('Should return Surveys', async () => {
       const accessToken = await makeAccessToken()
@@ -81,22 +77,18 @@ describe('Survey GraphQL', () => {
         date: now
       })
 
-      const { query } = createTestClient({
-        apolloServer,
-        extendMockRequest: {
-          headers: {
-            'x-access-token': accessToken
-          }
-        }
-      })
-      const res: any = await query(surveysQuery)
+      const res = await request(app)
+        .post('/graphql')
+        .set('x-access-token', accessToken)
+        .send({ query })
 
-      expect(res.data.surveys.length).toBe(1)
-      expect(res.data.surveys[0].id).toBeTruthy()
-      expect(res.data.surveys[0].question).toBe('Question')
-      expect(res.data.surveys[0].date).toBe(now.toISOString())
-      expect(res.data.surveys[0].didAnswer).toBe(false)
-      expect(res.data.surveys[0].answers).toEqual([{
+      expect(res.status).toBe(200)
+      expect(res.body.data.surveys.length).toBe(1)
+      expect(res.body.data.surveys[0].id).toBeTruthy()
+      expect(res.body.data.surveys[0].question).toBe('Question')
+      expect(res.body.data.surveys[0].date).toBe(now.toISOString())
+      expect(res.body.data.surveys[0].didAnswer).toBe(false)
+      expect(res.body.data.surveys[0].answers).toEqual([{
         answer: 'Answer 1',
         image: 'http://image-name.com'
       }, {
@@ -117,11 +109,14 @@ describe('Survey GraphQL', () => {
         date: new Date()
       })
 
-      const { query } = createTestClient({ apolloServer })
-      const res: any = await query(surveysQuery)
+      const res = await request(app)
+        .post('/graphql')
+        .send({ query })
 
-      expect(res.data).toBeFalsy()
-      expect(res.errors[0].message).toBe('Access denied')
+      expect(res.status).toBe(403)
+
+      expect(res.body.data).toBeFalsy()
+      expect(res.body.errors[0].message).toBe('Access denied')
     })
   })
 })
